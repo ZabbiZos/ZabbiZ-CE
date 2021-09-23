@@ -4,11 +4,10 @@ Public reporitory for ZabbiZ-CE
 This repository contains a Zabbix agent for z/OS codename ZabbiZ.
 It is a prototype of a "passive" agent.
 It is written in REXX
-The agent consists of two files:
-- the REXX-code file:     ZABXAGNT
-- the configuration file: ZABXCONF
+The agent requires a config file. Minimal functional is conf/example.
+You do need to change ListenIP to one of your machines home IPs. (tso netstat home).
+Optionally also change ListenPort
 
-The current version uses a configuration file stored in a PDS-member.
 
 The configuration file stays as close as possible to the original configuration file on Linux.
 
