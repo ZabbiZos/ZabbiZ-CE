@@ -65,4 +65,5 @@ If you want to run this as a 'real' Started Task (and who doesn't?) you can use 
     //PARMDD       DD *
     SH /path/to/bin/zabxagnt /path/to/config
 
-Doc's on how to configure Zabbix will follow...
+Doc's on how to configure Zabbix will follow... 
+See "Items.md"  for a list of all items currently available.
