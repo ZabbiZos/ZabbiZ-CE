@@ -35,6 +35,26 @@ Edit conf/myconf to reflect your settings (minimally set ListenIP and ListenPort
 
      bin/zabxagnt conf/myconf
 
+You will see:
+
+    IBMUSER:/prj/repos/ZabbiZ-CE: >bin/zabxagnt conf/example 
+               425 record s were read from file:  ZABXCONF
+                62 blank records were read.
+               354 records ignored that began with a #  (hash).
+
+    The list of 8 variables and their values follows:
+
+     ACTIVEAGENT = N
+      LISTENPORT = 10054
+        LISTENIP = 192.168.1.20
+      DEBUGLEVEL = 4
+          SERVER = ::/0
+         TIMEOUT = 10
+       ALLOWROOT = 1
+    ERPARAMETERS = 1
+
+
+
 If you want to run this as a 'real' Started Task (and who doesn't?) you can use our good old friend BPXBATCH as illustrated below.
 
     //ZABBIX    EXEC PGM=BPXBATCH,PARMDD=PARMDD
