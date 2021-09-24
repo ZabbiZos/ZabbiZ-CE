@@ -35,7 +35,7 @@ Edit conf/myconf to reflect your settings (minimally set ListenIP and ListenPort
 
      bin/zabxagnt conf/myconf
 
-You will see:
+You will see output like below and can stop via CTRL-C.
 
     IBMUSER:/prj/repos/ZabbiZ-CE: >bin/zabxagnt conf/example 
                425 record s were read from file:  ZABXCONF
@@ -65,3 +65,4 @@ If you want to run this as a 'real' Started Task (and who doesn't?) you can use 
     //PARMDD       DD *
     SH /path/to/bin/zabxagnt /path/to/config
 
+Doc's on how to configure Zabbix will follow...
