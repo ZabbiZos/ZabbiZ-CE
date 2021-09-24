@@ -4,11 +4,10 @@ Public reporitory for ZabbiZ-CE
 This repository contains a Zabbix agent for z/OS codename ZabbiZ.
 It is a prototype of a "passive" agent.
 It is written in REXX
-The agent consists of two files:
-- the REXX-code file:     ZABXAGNT
-- the configuration file: ZABXCONF
+The agent requires a config file. Minimal functional is conf/example.
+You do need to change ListenIP to one of your machines home IPs. (tso netstat home).
+Optionally also change ListenPort
 
-The current version uses a configuration file stored in a PDS-member.
 
 The configuration file stays as close as possible to the original configuration file on Linux.
 
@@ -25,3 +24,45 @@ Suggestions for improvement:
 - extending the keys that the agent replies the values for;
 - programming the options in the configuration file
 - etc.
+
+# Installation
+
+    git clone git@github.com:ZabbiZos/ZabbiZ-CE.git
+    cd ZabbiZ-CE
+    cp conf/example conf/myconf
+    
+Edit conf/myconf to reflect your settings (minimally set ListenIP and ListenPort). Then
+
+     bin/zabxagnt conf/myconf
+
+You will see output like below and can stop via CTRL-C.
+
+    IBMUSER:/prj/repos/ZabbiZ-CE: >bin/zabxagnt conf/example 
+               425 record s were read from file:  ZABXCONF
+                62 blank records were read.
+               354 records ignored that began with a #  (hash).
+
+    The list of 8 variables and their values follows:
+
+     ACTIVEAGENT = N
+      LISTENPORT = 10054
+        LISTENIP = 192.168.1.20
+      DEBUGLEVEL = 4
+          SERVER = ::/0
+         TIMEOUT = 10
+       ALLOWROOT = 1
+    ERPARAMETERS = 1
+
+
+
+If you want to run this as a 'real' Started Task (and who doesn't?) you can use our good old friend BPXBATCH as illustrated below.
+
+    //ZABBIX    EXEC PGM=BPXBATCH,PARMDD=PARMDD
+    //*              RUN ZABBIX AGENT
+    //STDENV       DD DUMMY
+    //STDOUT       DD SYSOUT=*
+    //STDERR       DD SYSOUT=*
+    //PARMDD       DD *
+    SH /path/to/bin/zabxagnt /path/to/config
+
+Doc's on how to configure Zabbix will follow...

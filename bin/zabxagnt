@@ -15,6 +15,24 @@
 **  language governing permissions and limitations under the
 **  License.
 ****************************************************************/
+parse arg conffile 
+
+if conffile = "" then do
+  say " _______  _______  _______  __   __  _______  _______  __    _  _______ "
+  say "|       ||   _   ||  _    ||  |_|  ||   _   ||       ||  |  | ||       |"
+  say "|____   ||  |_|  || |_|   ||       ||  |_|  ||    ___||   |_| ||_     _|"
+  say " ____|  ||       ||       ||       ||       ||   | __ |       |  |   |  "
+  say "| ______||       ||  _   |  |     | |       ||   ||  ||  _    |  |   |  "
+  say "| |_____ |   _   || |_|   ||   _   ||   _   ||   |_| || | |   |  |   |  "
+  say "|_______||__| |__||_______||__| |__||__| |__||_______||_|  |__|  |___|  "
+  say "                 zabxagnt 0.3.0 : Passive/Active Zabbix Agent for z/OS  "
+  say "                                                             2020-2021  "
+  say "usage:          zabxagnt path/to/conffile" 
+  say "                Runs Zabbix Agent with production config"
+  say "                An example config should be in conf/example"
+  exit 4
+end
+
 call read_config_file
 IF ACTIVEAGENT = Y THEN
     call start_active_agent
@@ -630,11 +648,9 @@ e2atab = '00010203 04050607 08090A0B 0C0D0E0F'x || ,
 /***************************************************************/
 
 read_config_file:
-/*address TSO*/
-INPUT_FILE = 'IBMUSER.PROGRAMS.REXX(ZABXCONF)'
-"ALLOC DD(INPUT) DS('"INPUT_FILE"') SHR"
-"EXECIO * DISKR INPUT (STEM cFID. FINIS)"
-"free file(INPUT)"
+
+address syscall 'readfile' conffile 'cFID.'
+
 
 /*this will contain all the  bad VARs. */
 bad=

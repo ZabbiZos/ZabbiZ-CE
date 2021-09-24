@@ -1,6 +1,14 @@
 # This is a configuration file for Zabbix agent daemon (Unix)
 # To get more information about Zabbix, visit http://www.zabbix.com
+
+
 ActiveAgent=N
+
+
+## Make sure to set for your config..
+ListenPort=10054
+ListenIP=192.168.1.20
+
 ############ GENERAL PARAMETERS #################
 
 ### Option: PidFile
@@ -55,7 +63,7 @@ ActiveAgent=N
 # Mandatory: no
 # Range: 0-5
 # Default:
-# DebugLevel=3
+DebugLevel=4
 
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
@@ -106,7 +114,7 @@ Server=::/0
 # Mandatory: no
 # Range: 1024-32767
 # Default:
-ListenPort=10054
+# ListenPort=10054
 
 ### Option: ListenIP
 #	List of comma delimited IP addresses that the agent should listen on.
@@ -115,7 +123,7 @@ ListenPort=10054
 #
 # Mandatory: no
 # Default:
-ListenIP=192.168.2.248
+# ListenIP=192.168.1.20
 
 ### Option: StartAgents
 #	Number of pre-forked instances of zabbix_agentd that process passive checks.
