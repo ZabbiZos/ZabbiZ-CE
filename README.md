@@ -24,3 +24,24 @@ Suggestions for improvement:
 - extending the keys that the agent replies the values for;
 - programming the options in the configuration file
 - etc.
+
+# Installation
+
+    git clone git@github.com:ZabbiZos/ZabbiZ-CE.git
+    cd ZabbiZ-CE
+    cp conf/example conf/myconf
+    
+Edit conf/myconf to reflect your settings (minimally set ListenIP and ListenPort). Then
+
+     bin/zabxagnt conf/myconf
+
+If you want to run this as a 'real' Started Task (and who doesn't?) you can use our good old friend BPXBATCH as illustrated below.
+
+    //ZABBIX    EXEC PGM=BPXBATCH,PARMDD=PARMDD
+    //*              RUN ZABBIX AGENT
+    //STDENV       DD DUMMY
+    //STDOUT       DD SYSOUT=*
+    //STDERR       DD SYSOUT=*
+    //PARMDD       DD *
+    SH /path/to/bin/zabxagnt /path/to/config
+
