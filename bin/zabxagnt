@@ -387,11 +387,16 @@ SELECT
       send_string = sysplex_name
     END
 /***************************************************************/
-/*  Get JES Information                                        */
+/*  Get JES Information (no node info in USS for now)          */
 /***************************************************************/
   WHEN read_string = 'JES' THEN
     DO
-      JES =  SYSVAR('SYSJES')  '.' SYSVAR('SYSNODE') || ')'
+      CVT      = C2d(Storage(10,4))
+      JESCT    = C2d(Storage(D2x(CVT + 296),4))
+      SSCVT    = C2d(Storage(D2x(JESCT+24),4)) 
+      JESPJESN = Storage(D2x(JESCT + 28),4)  /* name of primary JES  */
+      
+      JES =  JESPJESN
       send_string = JES
     END
 /***************************************************************/
@@ -555,6 +560,7 @@ cec_type = Substr(QVS_Out,9,4)
 cec_model = Substr(QVS_Out,13,12)
 cec_serial = Substr(QVS_Out,39,6)
 Select
+  When cec_type = '1090' Then cec_desc = '(ZPDT)'
   When cec_type = '2064' Then cec_desc = '(z Series 900)'
   When cec_type = '2066' Then cec_desc = '(z Series 800)'
   When cec_type = '2084' Then cec_desc = '(z Series 990)'
@@ -572,6 +578,7 @@ Select
   When cec_type = '3907' Then cec_desc = '(IBM Z z14 ZR1)'
   When cec_type = '8561' Then cec_desc = '(IBM Z z15)'
   Otherwise cec_desc = ''
+end
 return
 
 /***************************************************************/
